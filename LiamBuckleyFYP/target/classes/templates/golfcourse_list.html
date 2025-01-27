@@ -1,0 +1,75 @@
+<!--HTML below uses some code (line 26-52) taken from Start Bootstrap "Shop Homepage" David T Miller(2013) while incorporating Thymeleaf attributes for Golf Courses -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Golf Courses</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .card-body {
+      height: 200px; /* Adjust the height as needed */
+      overflow: hidden;
+    }
+    .card-img-top {
+      width: 100%;
+      height: 150px; /* Adjust the height as needed */
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+<div class="text-center">
+  <h1>Welcome to the Golf Courses page <span th:text="${userLogin}"></span></h1>
+</div>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col">
+      <form method="get" action="/searchByName" class="form-inline">
+        <div class="form-group mb-2">
+          <input type="text" class="form-control" name="name" placeholder="Golf Course Name" required>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2 ml-2">Search by Name</button>
+      </form>
+    </div>
+    <div class="col">
+      <form method="get" action="/search" class="form-inline">
+        <div class="form-group mb-2">
+          <input type="date" class="form-control" name="date" placeholder="Date" required>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2 ml-2">Search by Date</button>
+      </form>
+    </div>
+  </div>
+</div>
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      <div th:each="golfCourse : ${golfCourses}" class="col mb-5">
+        <div class="card h-100">
+          <img class="card-img-top" th:src="@{/images/{image}(image=${golfCourse.image})}" alt="Golf Course Image" />
+          <div class="card-body p-4">
+            <div class="text-center">
+              <h5 class="fw-bolder" th:text="${golfCourse.name}">Golf Course Name</h5>
+              <p th:text="${golfCourse.holes} + ' holes'">Holes</p>
+              <p th:text="'Rating: ' + ${golfCourse.rating}">Rating</p>
+              <p th:text="'Green Fee: €' + ${golfCourse.greenFee}">Green Fee</p>
+            </div>
+          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <a class="btn btn-outline-dark mt-auto" th:href="@{/golfcourse/{id}(id=${golfCourse.id})}">View Times</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/scripts.js"></script>
+</body>
+</html>
+
+<!--David T.Miller (2013). Shop Homepage - Bootstrap Ecommerce Store Template. [online] Available at: https://startbootstrap.com/template/shop-homepage. [Accessed 6 Nov. 2024].-->

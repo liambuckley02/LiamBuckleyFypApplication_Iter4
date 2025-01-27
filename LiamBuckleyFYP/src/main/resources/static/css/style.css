@@ -1,0 +1,117 @@
+/* Below css is taken from codepen.io and modified to suit the project */
+/* Reset margin and padding for the body, set font and background image */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: url(https://reveregolf.com/wp-content/uploads/2023/05/iStock-1454927838-scaled.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Add a green overlay to the left 15% of the body */
+
+/* Style for the form container */
+.form {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    min-height: 400px;
+    background-color: #fff;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+/* Style for the form heading */
+.form h2 {
+    color: #777;
+    margin: 0 0 40px;
+    padding: 0;
+}
+
+/* Style for the input box container */
+.form .input-box {
+    position: relative;
+    margin: 20px 0;
+}
+
+/* Style for the input fields */
+.form .input-box input {
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    border-bottom: 2px solid #777;
+    outline: none;
+    padding: 10px;
+    padding-left: 30px;
+    box-sizing: border-box;
+    font-weight: bold;
+    color: #777;
+}
+
+/* Change border color on focus and valid input */
+.form .input-box input:focus,
+.form .input-box input:valid {
+    border-bottom-color: #026a0c;
+}
+
+/* Style for the icons inside input fields */
+.form .input-box .fa {
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    font-size: 18px;
+    color: #777;
+}
+
+/* Style for the submit button */
+.form .input-box input[type="submit"] {
+    border: none;
+    cursor: pointer;
+    background-color: #028a0f;
+    color: #fff;
+    font-weight: bold;
+    text-align: center; /* Center the text */
+    padding: 10px; /* Add padding for better appearance */
+    transition: 0.5s;
+}
+
+/* Change background color on hover for the submit button */
+.form .input-box input[type="submit"]:hover {
+    background-color: #026a0c;
+}
+
+/* Style for the links */
+.form a {
+    text-decoration: none;
+    color: #777;
+    margin-top: 20px;
+    font-weight: bold;
+    display: block; /* Ensure the link is a block element */
+    text-align: center; /* Center the text */
+    transition: 0.5s;
+}
+
+/* Change color on hover for the links */
+.form a:hover {
+    color: rgba(3, 244, 63, 0.45);
+}
+
+.custom-footer {
+    height: 100px; /* Adjust the height as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card {
+    height: 100%;
+}
+.card {
+    height: 300px; /* Adjust the height as needed */
+}
+
+/* FrankDoodie. (2018). Login form - Simple Sign In Page Design. [online] Available at: https://codepen.io/FrankieDoodie/details/OBZMZN
+[Accessed 6 Nov. 2024].
