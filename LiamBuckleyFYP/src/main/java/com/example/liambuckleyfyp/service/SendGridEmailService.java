@@ -24,7 +24,7 @@ public class SendGridEmailService {
         // Creates the sender email object
         Email from = new Email("121421742@umail.ucc.ie"); // Use your verified email address
         // Creates the recipient email object
-        Email toEmail = new Email("liambuckley381@gmail.com");
+        Email toEmail = new Email(to);
         // Creates the email content object
         Content content = new Content("text/plain", text);
         // Creates the email object with the sender, subject, recipient, and content

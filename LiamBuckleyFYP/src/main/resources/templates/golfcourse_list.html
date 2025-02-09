@@ -43,6 +43,12 @@
     </div>
   </div>
 </div>
+
+<!-- Add this section to display the link/button for logged-in users -->
+<div class="text-center mt-3" th:if="${userLogin != null}">
+  <a href="/myBookings" class="btn btn-info">View My Upcoming Bookings</a>
+</div>
+
 <section class="py-5">
   <div class="container px-4 px-lg-5 mt-5">
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -71,5 +77,4 @@
 <script src="js/scripts.js"></script>
 </body>
 </html>
-
 <!--David T.Miller (2013). Shop Homepage - Bootstrap Ecommerce Store Template. [online] Available at: https://startbootstrap.com/template/shop-homepage. [Accessed 6 Nov. 2024].-->

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Booking Confirmation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5">Your booking has been modified!</h1>
+    <p><strong>Username:</strong> <span th:text="${userLogin}"></span></p>
+    <p><strong>Golf Course:</strong> <span th:text="${golfCourse.name}"></span></p>
+    <p><strong>New Date:</strong> <span th:text="${newDate}"></span></p>
+    <p><strong>New Time:</strong> <span th:text="${newTime}"></span></p>
+    <a href="/golfcourses" class="btn btn-primary">Back to list</a>
+
+    <!-- Cancel Booking Form -->
+    <form action="/cancelBooking" method="post">
+        <input type="hidden" name="golfCourseId" th:value="${golfCourse.id}">
+        <input type="hidden" name="time" th:value="${newTime}">
+        <input type="hidden" name="date" th:value="${newDate}">
+        <button type="submit" class="btn btn-danger">Cancel Booking</button>
+    </form>
+
+    <!-- Error Message -->
+    <div th:if="${errorMessage}" class="alert alert-danger mt-3">
+        <p th:text="${errorMessage}"></p>
+    </div>
+</div>
+</body>
+</html>

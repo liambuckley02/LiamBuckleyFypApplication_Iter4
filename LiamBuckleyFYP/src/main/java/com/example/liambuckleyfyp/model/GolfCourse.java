@@ -1,4 +1,3 @@
-//Below code is a mixture of code from Java Master (2021) (line 7 - 36) and my own code the code itself has been modified to fit my project.
 package com.example.liambuckleyfyp.model;
 
 import jakarta.persistence.*;
@@ -32,7 +31,7 @@ public class GolfCourse {
 
     private Double greenFee; // Green fee for the golf course
 
-    @OneToMany(mappedBy = "golfCourse", cascade = CascadeType.ALL, orphanRemoval = true)// Defines a one-to-many relationship with TimeSlot entities, where the golfCourse field in TimeSlot is the owning side
+    @OneToMany(mappedBy = "golfCourse", cascade = CascadeType.ALL, orphanRemoval = true) // Defines a one-to-many relationship with TimeSlot entities, where the golfCourse field in TimeSlot is the owning side
     private List<TimeSlot> times; // List of available time slots for the golf course
 
     // Getters and setters for id, name, location, image, description, contactInfo, holes, rating, greenFee, and times

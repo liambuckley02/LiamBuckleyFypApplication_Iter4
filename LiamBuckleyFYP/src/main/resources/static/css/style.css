@@ -113,5 +113,22 @@ body {
     height: 300px; /* Adjust the height as needed */
 }
 
+
+.btn-dark-green {
+    background-color: #006400;
+    color: white;
+    border-color: #006400;
+}
+
+.btn-dark-green:hover {
+    background-color: #004d00;
+    border-color: #004d00;
+}
+
+.review-text {
+    color: #333; /* Darker color for better visibility */
+    font-weight: bold;
+}
+
 /* FrankDoodie. (2018). Login form - Simple Sign In Page Design. [online] Available at: https://codepen.io/FrankieDoodie/details/OBZMZN
 [Accessed 6 Nov. 2024].

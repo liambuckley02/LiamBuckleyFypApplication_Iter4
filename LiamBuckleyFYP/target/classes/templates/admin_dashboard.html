@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .container {
+      display: flex;
+    }
+    .left, .right {
+      flex: 1;
+      padding: 10px;
+    }
+    .left {
+      border-right: 1px solid #ccc;
+    }
+    .right table {
+      width: 100%;
+    }
+    .right th, .right td {
+      padding: 10px;
+      text-align: left;
+    }
+    .right th {
+      background-color: #333;
+      color: #fff;
+    }
+    .right td {
+      color: #333;
+    }
+    .right td.time, .right td.date {
+      padding-right: 20px;
+    }
+  </style>
+  <script>
+    function filterTimeslots() {
+      var selectedCourseId = document.getElementById("golfCourseSelect").value;
+      var rows = document.querySelectorAll(".timeslot-row");
+      rows.forEach(function(row) {
+        if (row.getAttribute("data-course-id") === selectedCourseId || selectedCourseId === "all") {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+<h1>Welcome to the Admin Dashboard</h1>
+
+<div class="container">
+  <div class="left">
+    <h2>Manage Users</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="user : ${users}">
+        <td>
+          <form th:action="@{/admin/update}" method="post" style="display: inline;">
+            <input type="hidden" th:name="id" th:value="${user.id}" />
+            <input type="text" th:name="login" th:value="${user.login}" />
+            <input type="text" th:name="password" th:value="${user.password}" />
+            <button type="submit">Update</button>
+          </form>
+          <form th:action="@{/admin/delete}" method="post" style="display: inline;">
+            <input type="hidden" th:name="id" th:value="${user.id}" />
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h2>Upcoming Bookings</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Booking ID</th>
+        <th>Golf Course ID</th>
+        <th>User Login</th>
+        <th>Time</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="booking : ${bookings}">
+        <td th:text="${booking.id}"></td>
+        <td th:text="${booking.golfCourse.id}"></td>
+        <td th:text="${booking.userLogin}"></td>
+        <td th:text="${booking.time}"></td>
+        <td th:text="${booking.date}"></td>
+        <td>
+          <form th:action="@{/admin/cancelBooking}" method="post" style="display: inline;">
+            <input type="hidden" th:name="bookingId" th:value="${booking.id}" />
+            <button type="submit">Cancel</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="right">
+    <h2>Current Timeslots</h2>
+    <label for="golfCourseSelect">Select Golf Course ID:</label>
+    <select id="golfCourseSelect" onchange="filterTimeslots()">
+      <option value="all">All</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+    <table>
+      <thead>
+      <tr>
+        <th>Golf Course ID</th>
+        <th>Golf Course Name</th>
+        <th>Time</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="timeslot : ${timeslots}" class="timeslot-row" th:data-course-id="${timeslot.golfCourse.id}">
+        <td th:text="${timeslot.golfCourse.id}"></td>
+        <td th:text="${timeslot.golfCourse.name}"></td>
+        <td th:text="${timeslot.time}" class="time"></td>
+        <td th:text="${timeslot.date}" class="date"></td>
+        <td>
+          <form th:action="@{/admin/timeslot/update}" method="post" style="display: inline;">
+            <input type="hidden" th:name="id" th:value="${timeslot.id}" />
+            <input type="text" th:name="time" th:value="${timeslot.time}" />
+            <input type="text" th:name="date" th:value="${timeslot.date}" />
+            <button type="submit">Update</button>
+          </form>
+          <form th:action="@{/admin/timeslot/delete}" method="post" style="display: inline;">
+            <input type="hidden" th:name="id" th:value="${timeslot.id}" />
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h2>Add New Timeslot</h2>
+    <form th:action="@{/admin/timeslot/add}" method="post">
+      <label for="golfCourseId">Golf Course ID:</label>
+      <input type="text" id="golfCourseId" name="golfCourseId" required />
+      <label for="time">Time:</label>
+      <input type="text" id="time" name="time" required />
+      <label for="date">Date:</label>
+      <input type="text" id="date" name="date" required />
+      <button type="submit">Add Timeslot</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

@@ -15,6 +15,17 @@
     <p><strong>Date:</strong> <span th:text="${date}"></span></p>
     <p><strong>Time:</strong> <span th:text="${time}"></span></p>
     <a href="/golfcourses" class="btn btn-primary">Back to list</a>
+
+    <!-- Cancel Booking Form -->
+    <form action="/cancelBooking" method="post">
+        <input type="hidden" name="golfCourseId" th:value="${golfCourse.id}">
+        <input type="hidden" name="time" th:value="${time}">
+        <input type="hidden" name="date" th:value="${date}">
+        <button type="submit" class="btn btn-danger">Cancel Booking</button>
+    </form>
+
+
+    <!-- Payment Confirmation Links -->
     <div class="mt-3">
         <a th:if="${golfCourse.id == 1}" th:href="'https://buy.stripe.com/test_28ocNF216dNG5qMeUU'" class="btn btn-success">Confirm Payment</a>
     </div>

@@ -1,47 +1,69 @@
 //Below code is taken from a YouTube tutorial by Java Master (2021) on how to create a user register and login page
 package com.example.liambuckleyfyp.service;
+
 import com.example.liambuckleyfyp.model.UsersModel;
+import com.example.liambuckleyfyp.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.liambuckleyfyp.repository.UsersRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsersService {
 
-    // Dependency injection of UsersRepository
     private final UsersRepository usersRepository;
 
-    // Constructor to inject UsersRepository dependency
+    @Autowired
     public UsersService(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }
 
-    // Method to register a new user
     public UsersModel registerUser(String login, String password, String email) {
-        // Check if login or password is null
         if (login == null || password == null) {
             return null;
         } else {
-            // Check if a user with the same login already exists
             if (usersRepository.findFirstByLogin(login).isPresent()) {
                 System.out.println("Duplicate login");
                 return null;
             }
-            // Create a new UsersModel object and set its properties
             UsersModel usersModel = new UsersModel();
             usersModel.setLogin(login);
             usersModel.setPassword(password);
             usersModel.setEmail(email);
-            // Save the new user to the repository and return the saved user
             return usersRepository.save(usersModel);
         }
     }
 
-    // Method to authenticate a user
     public UsersModel authenticate(String login, String password) {
-        // Find a user by login and password, return null if not found
-        return usersRepository.findByLoginAndPassword(login, password).orElse(null);
+        List<UsersModel> users = usersRepository.findByLoginAndPassword(login, password);
+        System.out.println("Retrieved users: " + users);
+        if (!users.isEmpty()) {
+            return users.get(0); // Return the first user found
+        } else {
+            return null;
+        }
     }
+    public List<UsersModel> getAllUsers() {
+        // Implementation to retrieve all users
+        return usersRepository.findAll();// return the list of users;
+    }
+
+    public void updateUser(int id, String login, String password) {
+        Optional<UsersModel> userOptional = usersRepository.findById(id);
+        if (userOptional.isPresent()) {
+            UsersModel user = userOptional.get();
+            user.setLogin(login);
+            user.setPassword(password);
+            usersRepository.save(user);
+        }
+    }
+
+    public void deleteUser(int id) {
+        usersRepository.deleteById(id);
+    }
+
+
 }
 //References
 // Java Master (2021). Java Web Project | Create Login and Register Form From Scratch with, Java11, Spring MVC, PostgreSQL. [online] YouTube. Available at: https://www.youtube.com/watch?v=x_nfnVU0wAI [Accessed 2 Nov. 2024].

@@ -1,0 +1,38 @@
+<!-- `src/main/resources/templates/my_bookings.html` -->
+<!-- `src/main/resources/templates/mybookings.html` -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<head>
+    <title>My Bookings</title>
+</head>
+<body>
+<h1>My Bookings</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Golf Course</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="booking : ${bookings}">
+        <td th:text="${booking.golfCourse.name}"></td>
+        <td th:text="${booking.date}"></td>
+        <td th:text="${booking.time}"></td>
+        <td>
+            <form action="/cancelBooking" method="post">
+                <input type="hidden" name="golfCourseId" th:value="${booking.golfCourse.id}">
+                <input type="hidden" name="time" th:value="${booking.time}">
+                <input type="hidden" name="date" th:value="${booking.date}">
+                <input type="hidden" name="userLogin" th:value="${booking.userLogin}">
+                <button type="submit" class="btn btn-danger">Cancel Booking</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
